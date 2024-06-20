@@ -101,9 +101,9 @@ string variant = "default"
 ]],
 ```
 
----
+</details>
 
-</details></br>
+---
 
 #### `checkBox` ![std](img/std.svg)
 
@@ -120,7 +120,7 @@ int invert = 0
 ]],
 ```
 
-</details></br>
+</details>
 
 ---
 
@@ -145,7 +145,7 @@ color albedo = "default"
 ]],
 ```
 
-</details></br>
+</details>
 
 ---
 
@@ -169,7 +169,7 @@ string sss_mode = "default"
 ]],
 ```
 
-</details></br>
+</details>
 
 ---
 
@@ -193,7 +193,7 @@ int compositingMode = 0
 ]],
 ```
 
-</details></br>
+</details>
 
 ---
 
