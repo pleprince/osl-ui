@@ -35,9 +35,9 @@ Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.A
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
 
----
-
 #### `null` ![std](img/std.svg)
+
+---
 
 Parameters using a `null` widget are invisible in the UI.
 
@@ -53,9 +53,9 @@ string asset_version = "2.3.0"
 
 </details>
 
----
-
 #### `number` ![std](img/std.svg)
+
+---
 
 A widget for editable numeric values. This is the default widget used for number parameters.
 
@@ -84,9 +84,9 @@ float ior = 1.5
 
 </details>
 
----
-
 #### `string` ![std](img/std.svg)
+
+---
 
 Default widget type used for string parameters.
 
@@ -103,9 +103,9 @@ string variant = "default"
 
 </details>
 
----
-
 #### `checkBox` ![std](img/std.svg)
+
+---
 
 An int parameter displayed as a boolean check box.
 
@@ -122,9 +122,9 @@ int invert = 0
 
 </details>
 
----
-
 #### `color` ![std](img/std.svg)
+
+---
 
 A widget used to edit color parameters.
 
@@ -147,9 +147,9 @@ color albedo = "default"
 
 </details>
 
----
-
 #### `popup` ![std](img/std.svg)
+
+---
 
 Display a pop-up menu or combox box with literal choices for a string parameter.
 
@@ -171,9 +171,9 @@ string sss_mode = "default"
 
 </details>
 
----
-
 #### `mapper` ![std](img/std.svg)
+
+---
 
 An menu presenting associative choices (like enums) for int, float and string parameters.
 
@@ -195,7 +195,7 @@ int compositingMode = 0
 
 </details>
 
----
-
 ### `fileInput` ![new](img/new.svg)
+
+---
 
