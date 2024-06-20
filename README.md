@@ -35,6 +35,8 @@ Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.A
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
 
+---
+
 #### `null` ![std](img/std.svg)
 
 Parameters using a `null` widget are invisible in the UI.
@@ -50,6 +52,8 @@ string asset_version = "2.3.0"
 ```
 
 </details>
+
+---
 
 #### `number` ![std](img/std.svg)
 
@@ -80,6 +84,8 @@ float ior = 1.5
 
 </details>
 
+---
+
 #### `string` ![std](img/std.svg)
 
 Default widget type used for string parameters.
@@ -95,7 +101,9 @@ string variant = "default"
 ]],
 ```
 
-</details>
+---
+
+</details></br>
 
 #### `checkBox` ![std](img/std.svg)
 
@@ -112,7 +120,9 @@ int invert = 0
 ]],
 ```
 
-</details>
+</details></br>
+
+---
 
 #### `color` ![std](img/std.svg)
 
@@ -135,7 +145,9 @@ color albedo = "default"
 ]],
 ```
 
-</details>
+</details></br>
+
+---
 
 #### `popup` ![std](img/std.svg)
 
@@ -157,7 +169,9 @@ string sss_mode = "default"
 ]],
 ```
 
-</details>
+</details></br>
+
+---
 
 #### `mapper` ![std](img/std.svg)
 
@@ -179,7 +193,9 @@ int compositingMode = 0
 ]],
 ```
 
-</details>
+</details></br>
+
+---
 
 ### `fileInput` ![new](img/new.svg)
 
