@@ -129,7 +129,9 @@ A widget used to edit color parameters.
 ```c
 color albedo = "default"
 [[
-    string widget = "string"
+    string widget = "color",
+    int color_enableFilmlookVis = 1,
+    string label = "Albedo"
 ]],
 ```
 
