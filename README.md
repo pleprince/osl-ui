@@ -39,12 +39,17 @@ Defines which widget type will control the parameter. All parameter types defaul
 
 Parameters using a `null` widget are invisible in the UI.
 
+<details>
+<summary>Sample code</summary>
+
 ```c
 string asset_version = "2.3.0"
 [[
     string widget = "null"
 ]],
 ```
+
+</details>
 
 #### `number` ![std](img/std.svg)
 
@@ -59,6 +64,9 @@ A widget for editable numeric values. This is the default widget used for number
 | `slidermin` | float / int | Minimum value of the slider. | ![std](img/std.svg) |
 | `slidermax` | float / int | Maximum value of the slider. | ![std](img/std.svg) |
 
+<details>
+<summary>Sample code</summary>
+
 ```c
 float ior = 1.5
 [[
@@ -70,8 +78,14 @@ float ior = 1.5
 ]],
 ```
 
+</details>
+
 #### `string` ![std](img/std.svg)
+
 Default widget type used for string parameters.
+
+<details>
+<summary>Sample code</summary>
 
 ```c
 string variant = "default"
@@ -81,9 +95,14 @@ string variant = "default"
 ]],
 ```
 
+</details>
+
 #### `checkBox` ![std](img/std.svg)
 
 An int parameter displayed as a boolean check box.
+
+<details>
+<summary>Sample code</summary>
 
 ```c
 int invert = 0
@@ -92,6 +111,8 @@ int invert = 0
     string label = "Invert Output"
 ]],
 ```
+
+</details>
 
 #### `color` ![std](img/std.svg)
 
@@ -102,6 +123,9 @@ A widget used to edit color parameters.
 | `color_enableFilmlookVis` | int | Enable color-managed UI. | ![new](img/new.svg) |
 | `color_restrictComponents` | int | Limit components to [0:1] | ![new](img/new.svg) |
 
+<details>
+<summary>Sample code</summary>
+
 ```c
 color albedo = "default"
 [[
@@ -109,6 +133,7 @@ color albedo = "default"
 ]],
 ```
 
+</details>
 
 #### `popup` ![std](img/std.svg)
 
@@ -119,6 +144,9 @@ Display a pop-up menu or combox box with literal choices for a string parameter.
 | `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![std](img/std.svg) |
 | `editable` | int | If non-zero, present an editable field with a side menu | ![new](img/new.svg) |
 
+<details>
+<summary>Sample code</summary>
+
 ```c
 string sss_mode = "default"
 [[
@@ -127,6 +155,7 @@ string sss_mode = "default"
 ]],
 ```
 
+</details>
 
 #### `mapper` ![std](img/std.svg)
 
@@ -136,6 +165,9 @@ An menu presenting associative choices (like enums) for int, float and string pa
 | - | - | - | - |
 | `options` | string | A pipe-delimited list of menu items : value pairs, i.e. `"Add:0\|Over:1\|Multiply:2"` | ![std](img/std.svg) |
 
+<details>
+<summary>Sample code</summary>
+
 ```c
 int compositingMode = 0
 [[
@@ -144,3 +176,8 @@ int compositingMode = 0
     string label = "Compositing Mode"
 ]],
 ```
+
+</details>
+
+### `fileInput` ![new](img/new.svg)
+
