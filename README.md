@@ -12,9 +12,7 @@ This area is ripe for standardization and having implemented many of these keywo
 
 The emphasis of this proposal is to define a somewhat minimal set of UI hints that may be supported by most DCC applications.
 
-## Standard keywords
-
-### Common keywords
+## Common keywords
 
 These keywords are supported by all widgets.
 
@@ -23,7 +21,7 @@ These keywords are supported by all widgets.
 | `label` | string | A user-friendly name used in the UI | ![std](img/std.svg) |
 | `help` | string | A description of the parameter that may appear in the UI | ![std](img/std.svg) |
 
-### `page` ![std](img/std.svg)
+## `page` ![std](img/std.svg)
 
 Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.Advanced".
 
@@ -31,11 +29,11 @@ Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.A
 | - | - | - | - |
 | `open` | int | If 1, the page UI is expanded by default | ![new](img/new.svg) |
 
-### `widget` ![std](img/std.svg)
+## `widget` ![std](img/std.svg)
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
 
-#### Widget: `null` ![std](img/std.svg)
+### Widget: `null` ![std](img/std.svg)
 
 ---
 
@@ -48,7 +46,7 @@ string asset_version = "2.3.0"
 ]],
 ```
 
-#### Widget: `number` ![std](img/std.svg)
+### Widget: `number` ![std](img/std.svg)
 
 A widget for editable numeric values. This is the default widget used for number parameters.
 
@@ -72,7 +70,7 @@ float ior = 1.5
 ]],
 ```
 
-#### Widget: `string` ![std](img/std.svg)
+### Widget: `string` ![std](img/std.svg)
 
 Default widget type used for string parameters.
 
@@ -84,7 +82,7 @@ string variant = "default"
 ]],
 ```
 
-#### Widget: `checkBox` ![std](img/std.svg)
+### Widget: `checkBox` ![std](img/std.svg)
 
 An int parameter displayed as a boolean check box.
 
@@ -96,7 +94,7 @@ int invert = 0
 ]],
 ```
 
-#### Widget: `color` ![std](img/std.svg)
+### Widget: `color` ![std](img/std.svg)
 
 A widget used to edit color parameters.
 
@@ -114,7 +112,7 @@ color albedo = "default"
 ]],
 ```
 
-#### Widget: `popup` ![std](img/std.svg)
+### Widget: `popup` ![std](img/std.svg)
 
 Display a pop-up menu or combox box with literal choices for a string parameter.
 
@@ -131,7 +129,7 @@ string sss_mode = "default"
 ]],
 ```
 
-#### Widget: `mapper` ![std](img/std.svg)
+### Widget: `mapper` ![std](img/std.svg)
 
 An menu presenting associative choices (like enums) for int, float and string parameters.
 
@@ -148,7 +146,7 @@ int compositingMode = 0
 ]],
 ```
 
-#### Widget: `fileInput` ![new](img/new.svg)
+### Widget: `fileInput` ![new](img/new.svg)
 
 A string attributes containing a file path. There should be an associated button to open a file browser and select the file.
 
@@ -160,7 +158,7 @@ string texture = ""
 ]],
 ```
 
-### Arrays
+## Arrays
 
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
 
