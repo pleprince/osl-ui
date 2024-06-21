@@ -158,6 +158,53 @@ string texture = ""
 ]],
 ```
 
+### Widget: `colorRamp` ![new](img/new.svg)
+
+> [!NOTE]
+> OSL's spline interpolation shadeops only work on static arrays when most users actually want dynamic arrays. This forces the shader writer to copy multiple dynamic arrays to static arrays. I don't know the exact cost of that operation but it would be great to get rid of this limitation.
+> Start and end knots need to be repeated n-times depending on the interpolation scheme. It would be nice to add an option flag to let the spline shadeop automatically select the correct number of repetitions.
+
+Color ramps depend on multiple parameters to provide knots position, knots value and knots interpolation.
+
+The main trigger is an int parameter (for ex. "colorMap") with a `colorRamp` widget:
+
+* The main int parameter with the `colorRamp` widget, say `int colorMap = 4`. It's value is the number of currently used knots. This representation allows support of fixed-size ramps.
+* A *_Knots float array parameter defining the ramp knots positions: `float colorMap_Knots[] = {...}`.
+* A *_Colors color array parameter defining the color values: `float colorMap_Colors[] = {...}`.
+* A *_Interpolation string array parameter defining how knots are intepolated: `string colorMap_Interpolation[] = {...}`.
+
+| Widget options | Type | Description | |
+| - | - | - | - |
+| `gradientHeight` | int | The height of the gradient widget in pixels. | |
+
+```c
+int colorMap = 4
+[[
+    string label = "Color Map",
+    string widget = "colorRamp",
+    int gradientHeight = 25,
+]],
+float colorMap_Knots[] = {0, 0,
+                          1, 1}
+[[
+    int isDynamicArray = 1,
+    string widget = "null",
+]],
+float colorMap_Knots[] = {color(0), color(0),
+                          color(1), color(1)}
+[[
+    int isDynamicArray = 1,
+    string widget = "null",
+    int restrictComponents = 1
+]],
+float colorMap_Interpolation[] = {"catmull-rom", "catmull-rom",
+                                  "catmull-rom", "catmull-rom"}
+[[
+    int isDynamicArray = 1,
+    string widget = "null",
+]],
+```
+
 ## Arrays
 
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
