@@ -27,7 +27,7 @@ These keywords are supported by all widgets.
 
 Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.Advanced".
 
-| Config Keyword | Type | Description | |
+| Widget options | Type | Description | |
 | - | - | - | - |
 | `open` | int | If 1, the page UI is expanded by default | ![new](img/new.svg) |
 
@@ -35,14 +35,11 @@ Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.A
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
 
-#### `null` ![std](img/std.svg)
+#### Widget: `null` ![std](img/std.svg)
 
 ---
 
 Parameters using a `null` widget are invisible in the UI.
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 string asset_version = "2.3.0"
@@ -51,15 +48,11 @@ string asset_version = "2.3.0"
 ]],
 ```
 
-</details>
-
-#### `number` ![std](img/std.svg)
-
----
+#### Widget: `number` ![std](img/std.svg)
 
 A widget for editable numeric values. This is the default widget used for number parameters.
 
-| Config Keyword | Type | Description | |
+| Widget options | Type | Description | |
 | - | - | - | - |
 | `min` | float / int | An absolute minimum value for the parameter. | ![std](img/std.svg) |
 | `max` | float / int | An absolute maximum value for the parameter. | ![std](img/std.svg) |
@@ -67,9 +60,6 @@ A widget for editable numeric values. This is the default widget used for number
 | `slider` | int | If non-zero, display a slider to edit the value. | ![std](img/std.svg) |
 | `slidermin` | float / int | Minimum value of the slider. | ![std](img/std.svg) |
 | `slidermax` | float / int | Maximum value of the slider. | ![std](img/std.svg) |
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 float ior = 1.5
@@ -82,16 +72,9 @@ float ior = 1.5
 ]],
 ```
 
-</details>
-
-#### `string` ![std](img/std.svg)
-
----
+#### Widget: `string` ![std](img/std.svg)
 
 Default widget type used for string parameters.
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 string variant = "default"
@@ -101,16 +84,9 @@ string variant = "default"
 ]],
 ```
 
-</details>
-
-#### `checkBox` ![std](img/std.svg)
-
----
+#### Widget: `checkBox` ![std](img/std.svg)
 
 An int parameter displayed as a boolean check box.
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 int invert = 0
@@ -120,21 +96,14 @@ int invert = 0
 ]],
 ```
 
-</details>
-
-#### `color` ![std](img/std.svg)
-
----
+#### Widget: `color` ![std](img/std.svg)
 
 A widget used to edit color parameters.
 
-| Config Keyword | Type | Description | |
+| Widget options | Type | Description | |
 | - | - | - | - |
 | `color_enableFilmlookVis` | int | Enable color-managed UI. | ![new](img/new.svg) |
 | `color_restrictComponents` | int | Limit components to [0:1] | ![new](img/new.svg) |
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 color albedo = "default"
@@ -145,21 +114,14 @@ color albedo = "default"
 ]],
 ```
 
-</details>
-
-#### `popup` ![std](img/std.svg)
-
----
+#### Widget: `popup` ![std](img/std.svg)
 
 Display a pop-up menu or combox box with literal choices for a string parameter.
 
-| Config Keyword | Type | Description | |
+| Widget options | Type | Description | |
 | - | - | - | - |
 | `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![std](img/std.svg) |
 | `editable` | int | If non-zero, present an editable field with a side menu | ![new](img/new.svg) |
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 string sss_mode = "default"
@@ -169,20 +131,13 @@ string sss_mode = "default"
 ]],
 ```
 
-</details>
-
-#### `mapper` ![std](img/std.svg)
-
----
+#### Widget: `mapper` ![std](img/std.svg)
 
 An menu presenting associative choices (like enums) for int, float and string parameters.
 
-| Config Keyword | Type | Description | |
+| Widget options | Type | Description | |
 | - | - | - | - |
 | `options` | string | A pipe-delimited list of menu items : value pairs, i.e. `"Add:0\|Over:1\|Multiply:2"` | ![std](img/std.svg) |
-
-<details>
-<summary>Sample code</summary>
 
 ```c
 int compositingMode = 0
@@ -193,9 +148,56 @@ int compositingMode = 0
 ]],
 ```
 
-</details>
+#### Widget: `fileInput` ![new](img/new.svg)
 
-### `fileInput` ![new](img/new.svg)
+A string attributes containing a file path. There should be an associated button to open a file browser and select the file.
 
----
+```c
+string texture = ""
+[[
+    string widget = "fileInput",
+    string label = "Texture"
+]],
+```
 
+### Arrays
+
+OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
+
+* **Dynamic arrays** allow the addition, re-ordering and removal of array elements.
+* **UI Structs** are a way to display multiple arrays as if they were a single array of structs, which isn't natively supported by OSL, but useful to group, for example, layer parameters. If the arrays are dynamic, it will be the responsability of the DCC app to keep all participating arrays at the same size at all times.
+
+| Array options | Type | Description | |
+| - | - | - | - |
+| `size` | int | **Static arrays**: the array size.</br>**Dynamic arrays**: the number of existing members on node creation. Defaults to <kbd>-1</kbd> for empty. | [new](img/new.svg) |
+| `isDynamicArray` | int | Specifies if the array can be resized. | [new](img/new.svg) |
+| `uiStruct` | string | Associate this array with a named struct-like UI where members of multiple arrays are displayed interlaced. | [new](img/new.svg) |
+| `tupleSize` | int | Specifies the tuple size (column count). This is passed to the child widgets. | [new](img/new.svg) |
+| `tupleGroupSize` | int | Specifies the number of tuples each child widget should handle. | [new](img/new.svg) |
+
+```c
+int triplanarAxisEnable[3] = {1, 1, 1}
+[[
+    string label = "Enable Axis"
+    string widget = "checkBox",
+    int size = 3,
+    string uiStruct = "Triplanar Axes",
+]],
+string triplanarAxisTexture[3] = {"", "", ""}
+[[
+    string label = "Texture"
+    string widget = "fileInput",
+    int size = 3,
+    string uiStruct = "Triplanar Axes",
+]],
+float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
+[[
+    string label = "Enable Axis",
+    string widget = "number",
+    int size = 3,
+    string uiStruct = "Triplanar Axes",
+    int slider = 1,
+    float min = 0.0001,
+    float slidermax = 10.0
+]],
+```
