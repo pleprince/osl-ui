@@ -162,6 +162,8 @@ string texture = ""
 
 > [!NOTE]
 > OSL's spline interpolation shadeops only work on static arrays when most users actually want dynamic arrays. This forces the shader writer to copy multiple dynamic arrays to static arrays. I don't know the exact cost of that operation but it would be great to get rid of this limitation.
+
+> [!NOTE]
 > Start and end knots need to be repeated n-times depending on the interpolation scheme. It would be nice to add an option flag to let the spline shadeop automatically select the correct number of repetitions.
 
 Color ramps depend on multiple parameters to provide knots position, knots value and knots interpolation.
