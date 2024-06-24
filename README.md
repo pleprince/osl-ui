@@ -58,8 +58,6 @@ Defines which widget type will control the parameter. All parameter types defaul
 
 ### Widget: `null` ![std](img/std.svg)
 
----
-
 Parameters using a `null` widget are invisible in the UI.
 
 ##### Sample code
