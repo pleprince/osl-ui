@@ -29,6 +29,29 @@ Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.A
 | - | - | - | - |
 | `open` | int | If 1, the page UI is expanded by default | ![new](img/new.svg) |
 
+##### Sample code
+
+```c
+color specularTint = 1
+[[[
+    string page = "Specular",
+    string label = "Tint",
+]]],
+float specularIOR = 1.5
+[[
+    string page = "Specular",
+    string label = "Index of Refraction",
+    float min = 1.0
+]]
+int specularModel = 1
+[[
+    string page = "Specular",
+    string label = "Model",
+    string widget = "mapper",
+    string options = "Beckmann:0|GGX:1"
+]]
+```
+
 ## `widget` ![std](img/std.svg)
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
@@ -38,6 +61,8 @@ Defines which widget type will control the parameter. All parameter types defaul
 ---
 
 Parameters using a `null` widget are invisible in the UI.
+
+##### Sample code
 
 ```c
 string asset_version = "2.3.0"
@@ -59,6 +84,8 @@ A widget for editable numeric values. This is the default widget used for number
 | `slidermin` | float / int | Minimum value of the slider. | ![std](img/std.svg) |
 | `slidermax` | float / int | Maximum value of the slider. | ![std](img/std.svg) |
 
+##### Sample code
+
 ```c
 float ior = 1.5
 [[
@@ -74,6 +101,8 @@ float ior = 1.5
 
 Default widget type used for string parameters.
 
+##### Sample code
+
 ```c
 string variant = "default"
 [[
@@ -85,6 +114,8 @@ string variant = "default"
 ### Widget: `checkBox` ![std](img/std.svg)
 
 An int parameter displayed as a boolean check box.
+
+##### Sample code
 
 ```c
 int invert = 0
@@ -102,6 +133,8 @@ A widget used to edit color parameters.
 | - | - | - | - |
 | `color_enableFilmlookVis` | int | Enable color-managed UI. | ![new](img/new.svg) |
 | `color_restrictComponents` | int | Limit components to [0:1] | ![new](img/new.svg) |
+
+##### Sample code
 
 ```c
 color albedo = "default"
@@ -121,6 +154,8 @@ Display a pop-up menu or combox box with literal choices for a string parameter.
 | `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![std](img/std.svg) |
 | `editable` | int | If non-zero, present an editable field with a side menu | ![new](img/new.svg) |
 
+##### Sample code
+
 ```c
 string sss_mode = "default"
 [[
@@ -137,6 +172,8 @@ An menu presenting associative choices (like enums) for int, float and string pa
 | - | - | - | - |
 | `options` | string | A pipe-delimited list of menu items : value pairs, i.e. `"Add:0\|Over:1\|Multiply:2"` | ![std](img/std.svg) |
 
+##### Sample code
+
 ```c
 int compositingMode = 0
 [[
@@ -149,6 +186,8 @@ int compositingMode = 0
 ### Widget: `fileInput` ![new](img/new.svg)
 
 A string attributes containing a file path. There should be an associated button to open a file browser and select the file.
+
+##### Sample code
 
 ```c
 string texture = ""
@@ -166,24 +205,35 @@ string texture = ""
 > [!NOTE]
 > Start and end knots need to be repeated n-times depending on the interpolation scheme. It would be nice to add an option flag to let the spline shadeop automatically select the correct number of repetitions.
 
+> [!NOTE]
+> It would be good to make sure DCC app widgets support all standard OSL interpolation modes. Last time I checked Maya did not.
+
 Color ramps depend on multiple parameters to provide knots position, knots value and knots interpolation.
 
-The main trigger is an int parameter (for ex. "colorMap") with a `colorRamp` widget:
+The main parameter is an int parameter with a `colorRamp` widget. Its value is the number of currently used knots. This representation allows support of fixed-size ramps.
 
-* The main int parameter with the `colorRamp` widget, say `int colorMap = 4`. It's value is the number of currently used knots. This representation allows support of fixed-size ramps.
-* A *_Knots float array parameter defining the ramp knots positions: `float colorMap_Knots[] = {...}`.
-* A *_Colors color array parameter defining the color values: `float colorMap_Colors[] = {...}`.
-* A *_Interpolation string array parameter defining how knots are intepolated: `string colorMap_Interpolation[] = {...}`.
+The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `rampInterp`) to be functional. If any of theme is missing, an error should be raised.
+
+> [!NOTE]
+> Should we extend oslc to validate metadata ?
 
 | Widget options | Type | Description | |
 | - | - | - | - |
-| `gradientHeight` | int | The height of the gradient widget in pixels. | |
+| `rampKnots` | string | Name of the parameter storing knot positions. | ![new](img/new.svg) |
+| `rampColor` | string | Name of the parameter storing knot colors. | ![new](img/new.svg) |
+| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![new](img/new.svg) |
+| `gradientHeight` | int | The height of the gradient widget in pixels. | ![new](img/new.svg) |
+
+##### Sample code
 
 ```c
 int colorMap = 4
 [[
     string label = "Color Map",
     string widget = "colorRamp",
+    string rampKnots = "colorMap_Knots",
+    string rampColors = "colorMap_Colors",
+    string rampInterp = "colorMap_Interpolation",
     int gradientHeight = 25,
 ]],
 float colorMap_Knots[] = {0, 0,
@@ -207,6 +257,52 @@ float colorMap_Interpolation[] = {"catmull-rom", "catmull-rom",
 ]],
 ```
 
+### Widget: `floatRamp` ![new](img/new.svg)
+
+The main parameter is an int parameter with a `colorRamp` widget.
+* Its value is the number of currently used knots. This representation allows support of fixed-size ramps.
+
+The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `rampInterp`) to be functional.
+* If any of theme is missing, an error should be raised.
+
+| Widget options | Type | Description | ![new](img/new.svg) |
+| - | - | - | - |
+| `rampKnots` | string | Name of the parameter storing knot positions. | ![new](img/new.svg) |
+| `rampColor` | string | Name of the parameter storing knot colors. | ![new](img/new.svg) |
+| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![new](img/new.svg) |
+| `gradientHeight` | int | The height of the gradient widget in pixels. | ![new](img/new.svg) |
+
+##### Sample code
+
+```c
+int attenuationCurve = 5
+[[
+    string label = "Attenuation Curve",
+    string widget = "floatRamp",
+    string rampKnots = "attenCrv_Knots",
+    string rampFloats = "attenCrv_Values",
+    string rampInterp = "attenCrv_Interpolation",
+    int gradientHeight = 25,
+]],
+float attenCrv_Knots[] = {0, 0, 0.5, 1, 1}
+[[
+    int isDynamicArray = 1,
+    string widget = "null",
+]],
+float attenCrv_Values[] = {0, 0, 0.3333, 1, 1}
+[[
+    int isDynamicArray = 1,
+    string widget = "null"
+]],
+float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
+                                  "catmull-rom", "catmull-rom",
+                                  "catmull-rom"}
+[[
+    int isDynamicArray = 1,
+    string widget = "null",
+]],
+```
+
 ## Arrays
 
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
@@ -221,6 +317,8 @@ OSL support array parameters of any types and the metadata allows writers to dec
 | `uiStruct` | string | Associate this array with a named struct-like UI where members of multiple arrays are displayed interlaced. | [new](img/new.svg) |
 | `tupleSize` | int | Specifies the tuple size (column count). This is passed to the child widgets. | [new](img/new.svg) |
 | `tupleGroupSize` | int | Specifies the number of tuples each child widget should handle. | [new](img/new.svg) |
+
+##### Sample code
 
 ```c
 int triplanarAxisEnable[3] = {1, 1, 1}
