@@ -20,6 +20,7 @@ These keywords are supported by all widgets.
 | - | - | - | - |
 | `label` | string | A user-friendly name used in the UI | ![std](img/std.svg) |
 | `help` | string | A description of the parameter that may appear in the UI | ![std](img/std.svg) |
+</br>
 
 ## `page` ![std](img/std.svg)
 
@@ -51,6 +52,7 @@ int specularModel = 1
     string options = "Beckmann:0|GGX:1"
 ]]
 ```
+</br>
 
 ## `widget` ![std](img/std.svg)
 
@@ -300,6 +302,7 @@ float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
     string widget = "null",
 ]],
 ```
+</br>
 
 ## Arrays
 
@@ -343,4 +346,73 @@ float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
     float min = 0.0001,
     float slidermax = 10.0
 ]],
+```
+
+## Conditional visibility or locking
+
+These keywords allow to control a parameter's visibility or editability based on the value of one or more shader parameters. The comparison rules are defined as a set of pair-wise comparisons: <code><i>prefix</i>Path <i>prefix</i>Op <i>prefix</i>Value</code> or <code><i>prefix</i>Left <i>prefix</i>Op <i>prefix</i>Right</code>
+
+[^1]: Katana uses conditionalVis / conditionalLock but it favor a shorter keyword as it is still descriptive enough. TBD.
+
+The keyword structure is as follows:
+
+1. The root token is `vis` or `lock`[^1].
+1. It is followed by an optional identifying suffix.
+1. It ends with one of the following tokens: `Op`, `Path`, `Value`, `Left`, `Right`.
+
+| Visibility | Type | Description | |
+| - | - | - | - |
+| `vis*Path` | string | Parameter path constituting the left side of the comparison. |  |
+| `vis*Op` | string | Comparison method to show/hide this parameter |  |
+| `vis*Value` | string | A value for the right side of the comparison. |  |
+
+| Locking | Type | Description | |
+| - | - | - | - |
+| `lock*Path` | string | Parameter path constituting the left side of the comparison. |  |
+| `lock*Op` | string | the comparison method to lock/inlock this parameter |  |
+| `lock*Value` | string | A value for the right side of the comparison. |  |
+
+| Comparisons | Description | |
+| - | - | - |
+| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> |  |
+| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> |  |
+| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> |  |
+| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> |  |
+| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> |  |
+| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> |  |
+| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> |  |
+| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> |  |
+
+##### Sample code
+
+```c
+// Make linearize_sRGB visible
+// if (textureName != "" and textureGain > 0).
+
+string textureName = ""
+[[
+    string widget = "fileInput"
+]],
+float textureGain = 1.0
+[[
+    int slider = 1,
+    float min = 0.0,
+    float slidermax = 2.0
+]]
+int linearize_sRGB = 0
+[[
+    string widget = "checkBox",
+
+    string visTexPath = "../textureName",
+    string visTexOp = "notEqualTo",
+    string visTexValue = ""
+
+    string visGainPath = "../textureGain",
+    string visGainOp = "greaterThan",
+    string visGainValue = "0.0"
+
+    string visLeft = "visTex",
+    string visOp = "and",
+    string visRight = "visGain",
+]]
 ```
