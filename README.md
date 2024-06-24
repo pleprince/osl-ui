@@ -352,11 +352,12 @@ float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
 
 These keywords allow to control a parameter's visibility or editability based on the value of one or more shader parameters. The comparison rules are defined as a set of pair-wise comparisons: <code><i>prefix</i>Path <i>prefix</i>Op <i>prefix</i>Value</code> or <code><i>prefix</i>Left <i>prefix</i>Op <i>prefix</i>Right</code>
 
-[^1]: Katana uses conditionalVis / conditionalLock but it favor a shorter keyword as it is still descriptive enough. TBD.
+> [!NOTE]
+>Katana uses `conditionalVis` / `conditionalLock` but I prefer a shorter keyword as it is still descriptive enough. TBD.
 
 The keyword structure is as follows:
 
-1. The root token is `vis` or `lock`[^1].
+1. The root token is `vis` or `lock`.
 1. It is followed by an optional identifying suffix.
 1. It ends with one of the following tokens: `Op`, `Path`, `Value`, `Left`, `Right`.
 
