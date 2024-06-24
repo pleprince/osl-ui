@@ -20,6 +20,7 @@ These keywords are supported by all widgets.
 | - | - | - | - |
 | `label` | string | A user-friendly name used in the UI | ![std](img/std.svg) |
 | `help` | string | A description of the parameter that may appear in the UI | ![std](img/std.svg) |
+| `connectable` | int | Specifies if this parameter can be textured. Implicit default is 1. If not connectable, the host app should forbid connections. | ![new](img/new.svg) |
 </br>
 
 ## `page` ![std](img/std.svg)
@@ -304,7 +305,7 @@ float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
 ```
 </br>
 
-## Arrays
+## Arrays ![new](img/new.svg)
 
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
 
@@ -348,7 +349,7 @@ float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
 ]],
 ```
 
-## Conditional visibility or locking
+## Conditional visibility or locking ![new](img/new.svg)
 
 These keywords allow to control a parameter's visibility or editability based on the value of one or more shader parameters. The comparison rules are defined as a set of pair-wise comparisons: <code><i>prefix</i>Path <i>prefix</i>Op <i>prefix</i>Value</code> or <code><i>prefix</i>Left <i>prefix</i>Op <i>prefix</i>Right</code>
 
@@ -363,26 +364,26 @@ The keyword structure is as follows:
 
 | Visibility | Type | Description | |
 | - | - | - | - |
-| `vis*Path` | string | Parameter path constituting the left side of the comparison. |  |
-| `vis*Op` | string | Comparison method to show/hide this parameter |  |
-| `vis*Value` | string | A value for the right side of the comparison. |  |
+| `vis*Path` | string | Parameter path constituting the left side of the comparison. | ![new](img/new.svg) |
+| `vis*Op` | string | Comparison method to show/hide this parameter | ![new](img/new.svg) |
+| `vis*Value` | string | A value for the right side of the comparison. | ![new](img/new.svg) |
 
 | Locking | Type | Description | |
 | - | - | - | - |
-| `lock*Path` | string | Parameter path constituting the left side of the comparison. |  |
-| `lock*Op` | string | the comparison method to lock/inlock this parameter |  |
-| `lock*Value` | string | A value for the right side of the comparison. |  |
+| `lock*Path` | string | Parameter path constituting the left side of the comparison. | ![new](img/new.svg) |
+| `lock*Op` | string | the comparison method to lock/inlock this parameter | ![new](img/new.svg) |
+| `lock*Value` | string | A value for the right side of the comparison. | ![new](img/new.svg) |
 
 | Comparisons | Description | |
 | - | - | - |
-| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> |  |
-| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> |  |
-| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> |  |
-| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> |  |
-| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> |  |
-| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> |  |
-| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> |  |
-| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> |  |
+| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
+| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
+| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
+| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
+| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
+| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
+| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![new](img/new.svg) |
+| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![new](img/new.svg) |
 
 ##### Sample code
 
@@ -416,4 +417,27 @@ int linearize_sRGB = 0
     string visOp = "and",
     string visRight = "visGain",
 ]]
+```
+
+## DCC app integration ![new](img/new.svg)
+
+Occasionaly, OSL shaders need to carry more metadata to make integrate with host applications.
+
+| Visibility | Type | Description | |
+| - | - | - | - |
+| `*_nodeID` | int/string | Some apps like maya require a unique nodeID to avoid collisions. This should be prefixed with an identifier like a plugin name, i.e. rfm_nodeID |  |
+| `tags` | string[] | a number of tags to help the host app categorize / handle OSL nodes. |  |
+
+#### Sample code
+
+```c
+shader voronoi
+[[
+    string tags[1] = {"texture/2d"},
+    string 3dl_maya_nodeID = "0x00",
+    string help = "Computes a procedural voronoi patterns."
+]]
+(
+    ...
+)
 ```
