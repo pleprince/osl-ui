@@ -15,12 +15,14 @@ The emphasis of this proposal is to define a somewhat minimal set of UI hints th
 ## Support levels
 
 Given the number of controls to implement, it may be useful to introduce support levels.
+* ![partial](img/partial.svg) : Only support a small number of randomly chosen keywords.
+* ![basic](img/basic.svg) : Support a minimal standard set of keywords.
+* ![full](img/full.svg) : Support most if not all keywords.
 
-![partial](img/partial.svg) : Only support a small number of randomly chosen keywords.
-
-![basic](img/basic.svg) : Support a minimal standard set of keywords.
-
-![full](img/full.svg) : Support most if not all keywords.
+<!-- badge generation -->
+<!-- https://img.shields.io/badge/osl_metadata-PARTIAL-ff5533 -->
+<!-- https://img.shields.io/badge/osl_metadata-BASIC-44aa44 -->
+<!-- https://img.shields.io/badge/osl_metadata-FULL-08f -->
 
 One would hope that developers implements at least the basic level, as it would already provide a reasonnable user-experience.
 
