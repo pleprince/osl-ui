@@ -40,9 +40,9 @@ Given the number of controls to implement, it may be useful to introduce support
 * ![full](img/full.svg) : Support most if not all keywords.
 
 <!-- badge generation -->
-<!-- https://img.shields.io/badge/osl_metadata-PARTIAL-ff5533 -->
-<!-- https://img.shields.io/badge/osl_metadata-BASIC-44aa44 -->
-<!-- https://img.shields.io/badge/osl_metadata-FULL-08f -->
+<!-- ![partial](https://img.shields.io/badge/osl_metadata-PARTIAL-ff5533) -->
+<!-- ![basic](https://img.shields.io/badge/osl_metadata-BASIC-44aa44) -->
+<!-- ![full](https://img.shields.io/badge/osl_metadata-FULL-08f) -->
 
 One would hope that developers implements at least the basic level, as it would already provide a reasonnable user-experience.
 
