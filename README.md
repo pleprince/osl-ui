@@ -409,7 +409,7 @@ These keywords allow to control a parameter's visibility or editability based on
 >Katana uses `conditionalVis` / `conditionalLock` but I prefer a shorter keyword as it is still descriptive enough. TBD.
 
 > [!NOTE]
-> Pages should also support conditional visibility and locking.
+> Pages should also support conditional visibility and locking.</br>
 > How about `pageVis*` and `pageLock*` ?
 
 The keyword structure is as follows:
