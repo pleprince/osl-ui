@@ -7,20 +7,20 @@ Draft 1
 1. [Motivation](#motivation)
 1. [Support Levels](#support-levels)
 1. [Common Keywords](#common-keywords)
-1. [page](#page-std)
-1. [widget](#widget-std)
-   1. [number](#widget-number-std)
-   1. [string](#widget-string-std)
-   1. [checkBox](#widget-checkbox-std)
-   1. [color](#widget-color-std)
-   1. [popup](#widget-popup-std)
-   1. [mapper](#widget-mapper-std)
-   1. [fileInput](#widget-fileinput-new)
-   1. [colorRamp](#widget-colorramp-new)
-   1. [floatRamp](#widget-floatramp-new)
-1. [Arrays](#arrays-new)
-1. [Conditional visibility or locking](#conditional-visibility-or-locking-new)
-1. [DCC app integration](#dcc-app-integration-new)
+1. [page](#page)
+1. [widget](#widget)
+   1. [number](#widget-number)
+   1. [string](#widget-string)
+   1. [checkBox](#widget-checkbox)
+   1. [color](#widget-color)
+   1. [popup](#widget-popup)
+   1. [mapper](#widget-mapper)
+   1. [fileInput](#widget-fileinput)
+   1. [colorRamp](#widget-colorramp)
+   1. [floatRamp](#widget-floatramp)
+1. [Arrays](#arrays)
+1. [Conditional visibility or locking](#conditional-visibility-or-locking)
+1. [DCC app integration](#dcc-app-integration)
 
 ## Motivation
 
@@ -68,7 +68,7 @@ These keywords are supported by all widgets.
 | `connectable` | int | Specifies if this parameter accepts an incoming connection. If not connectable, the host app should forbid connections. Default to 1.| ![new](img/new.svg) |
 </br>
 
-## `page` ![std](img/std.svg)
+## `page`
 
 Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.Advanced".
 
@@ -100,7 +100,7 @@ int specularModel = 1
 ```
 </br>
 
-## `widget` ![std](img/std.svg)
+## `widget`
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
 
@@ -117,7 +117,7 @@ string asset_version = "2.3.0"
 ]],
 ```
 
-### Widget: `number` ![std](img/std.svg)
+### Widget: `number`
 
 A widget for editable numeric values. This is the default widget used for number parameters.
 
@@ -143,7 +143,7 @@ float ior = 1.5
 ]],
 ```
 
-### Widget: `string` ![std](img/std.svg)
+### Widget: `string`
 
 Default widget type used for string parameters.
 
@@ -157,7 +157,7 @@ string variant = "default"
 ]],
 ```
 
-### Widget: `checkBox` ![std](img/std.svg)
+### Widget: `checkBox`
 
 An int parameter displayed as a boolean check box.
 
@@ -171,7 +171,7 @@ int invert = 0
 ]],
 ```
 
-### Widget: `color` ![std](img/std.svg)
+### Widget: `color`
 
 A widget used to edit color parameters.
 
@@ -193,7 +193,7 @@ color albedo = "default"
 ]],
 ```
 
-### Widget: `popup` ![std](img/std.svg)
+### Widget: `popup`
 
 Display a pop-up menu or combox box with literal choices for a string parameter.
 
@@ -212,7 +212,7 @@ string sss_mode = "default"
 ]],
 ```
 
-### Widget: `mapper` ![std](img/std.svg)
+### Widget: `mapper`
 
 An menu presenting associative choices (like enums) for int, float and string parameters.
 
@@ -231,7 +231,7 @@ int compositingMode = 0
 ]],
 ```
 
-### Widget: `fileInput` ![new](img/new.svg)
+### Widget: `fileInput`
 
 A string attributes containing a file path. There should always be an associated button to open a file browser and select the file.
 
@@ -250,7 +250,7 @@ string texture = ""
 ]],
 ```
 
-### Widget: `colorRamp` ![new](img/new.svg)
+### Widget: `colorRamp`
 
 > [!NOTE]
 > OSL's spline interpolation shadeops only work on static arrays when most users actually want dynamic arrays. This forces the shader writer to copy multiple dynamic arrays to static arrays. I don't know the exact cost of that operation but it would be great to get rid of this limitation.
@@ -310,7 +310,7 @@ float colorMap_Interpolation[] = {"catmull-rom", "catmull-rom",
 ]],
 ```
 
-### Widget: `floatRamp` ![new](img/new.svg)
+### Widget: `floatRamp`
 
 The main parameter is an int parameter with a `colorRamp` widget.
 * Its value is the number of currently used knots. This representation allows support of fixed-size ramps.
@@ -357,7 +357,7 @@ float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
 ```
 </br>
 
-## Arrays ![new](img/new.svg)
+## Arrays
 
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
 
@@ -401,7 +401,7 @@ float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
 ]],
 ```
 
-## Conditional visibility or locking ![new](img/new.svg)
+## Conditional visibility or locking
 
 These keywords allow to control a parameter's visibility or editability based on the value of one or more shader parameters. The comparison rules are defined as a set of pair-wise comparisons: <code><i>prefix</i>Path <i>prefix</i>Op <i>prefix</i>Value</code> or <code><i>prefix</i>Left <i>prefix</i>Op <i>prefix</i>Right</code>
 
@@ -475,7 +475,7 @@ int linearize_sRGB = 0
 ]]
 ```
 
-## DCC app integration ![new](img/new.svg)
+## DCC app integration
 
 Occasionaly, OSL shaders need to carry more metadata to make integrate with host applications.
 
