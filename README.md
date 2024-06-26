@@ -12,6 +12,27 @@ This area is ripe for standardization and having implemented many of these keywo
 
 The emphasis of this proposal is to define a somewhat minimal set of UI hints that may be supported by most DCC applications.
 
+## Support levels
+
+Given the number of controls to implement, it may be useful to introduce support levels.
+
+![partial](img/partial.svg) : Only support a small number of randomly chosen keywords.
+
+![basic](img/basic.svg) : Support a minimal standard set of keywords.
+
+![full](img/full.svg) : Support most if not all keywords.
+
+One would hope that developers implements at least the basic level, as it would already provide a reasonnable user-experience.
+
+As of today:
+
+* RenderMan plugins are very close to full support.
+* Arnold plugins mostly ignore parameter metadata as it historically relied on an external metadata file.
+* Blender only supports 4 keywords.
+* VRay TBD
+* Redshift TBD
+* Octane TBD
+
 ## Common keywords
 
 These keywords are supported by all widgets.
@@ -20,7 +41,8 @@ These keywords are supported by all widgets.
 | - | - | - | - |
 | `label` | string | A user-friendly name used in the UI | ![std](img/std.svg) |
 | `help` | string | A description of the parameter that may appear in the UI | ![std](img/std.svg) |
-| `connectable` | int | Specifies if this parameter can be textured. Implicit default is 1. If not connectable, the host app should forbid connections. | ![new](img/new.svg) |
+| `readOnly` | int | If non-zero, only connections will be considered. Defaults to 0. | ![new](img/new.svg) |
+| `connectable` | int | Specifies if this parameter accepts an incoming connection. If not connectable, the host app should forbid connections. Default to 1.| ![new](img/new.svg) |
 </br>
 
 ## `page` ![std](img/std.svg)
@@ -186,7 +208,12 @@ int compositingMode = 0
 
 ### Widget: `fileInput` ![new](img/new.svg)
 
-A string attributes containing a file path. There should be an associated button to open a file browser and select the file.
+A string attributes containing a file path. There should always be an associated button to open a file browser and select the file.
+
+| Widget options | Type | Description | |
+| - | - | - | - |
+| `fileTypes` | string | A comma-delimited list of extensions, i.e. `"tex,tx,exr"`, to filter the dialog's file list. | ![std](img/std.svg) |
+| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available.
 
 ##### Sample code
 
@@ -427,6 +454,9 @@ Occasionaly, OSL shaders need to carry more metadata to make integrate with host
 | - | - | - | - |
 | `*_nodeID` | int/string | Some apps like maya require a unique nodeID to avoid collisions. This should be prefixed with an identifier like a plugin name, i.e. rfm_nodeID |  |
 | `tags` | string[] | a number of tags to help the host app categorize / handle OSL nodes. |  |
+| `*_attribute` | string | Specifies the name of the attribute that corresponds to this parameter. It should be prefixed an identifier like a plugin name, i.e. 3dlmaya_attribute |  |
+| `hidden` | int | Maya-specific: set the hidden flag of the attribute created for this parameter. |  |
+| `niceName` | string | Maya-specific: Sets the nice name of the attribute for display in the UI. |  |
 
 #### Sample code
 
