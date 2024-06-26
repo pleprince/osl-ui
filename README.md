@@ -410,6 +410,7 @@ These keywords allow to control a parameter's visibility or editability based on
 
 > [!NOTE]
 > Pages should also support conditional visibility and locking.
+> How about `pageVis*` and `pageLock*` ?
 
 The keyword structure is as follows:
 
