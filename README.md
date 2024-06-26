@@ -35,6 +35,7 @@ The emphasis of this proposal is to define a somewhat minimal set of UI hints th
 ## Support levels
 
 Given the number of controls to implement, it may be useful to introduce support levels.
+
 * ![partial](img/partial.svg) : Only support a small number of randomly chosen keywords.
 * ![basic](img/basic.svg) : Support a minimal standard set of keywords.
 * ![full](img/full.svg) : Support most if not all keywords.
@@ -98,6 +99,7 @@ int specularModel = 1
     string options = "Beckmann:0|GGX:1"
 ]]
 ```
+
 </br>
 
 ## `widget`
@@ -238,7 +240,7 @@ A string attributes containing a file path. There should always be an associated
 | Widget options | Type | Description | |
 | - | - | - | - |
 | `fileTypes` | string | A comma-delimited list of extensions, i.e. `"tex,tx,exr"`, to filter the dialog's file list. | ![std](img/std.svg) |
-| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available.
+| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available. | ![new](img/new.svg) |
 
 ##### Sample code
 
@@ -313,9 +315,11 @@ float colorMap_Interpolation[] = {"catmull-rom", "catmull-rom",
 ### Widget: `floatRamp`
 
 The main parameter is an int parameter with a `colorRamp` widget.
+
 * Its value is the number of currently used knots. This representation allows support of fixed-size ramps.
 
 The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `rampInterp`) to be functional.
+
 * If any of theme is missing, an error should be raised.
 
 | Widget options | Type | Description | ![new](img/new.svg) |
@@ -355,6 +359,7 @@ float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
     string widget = "null",
 ]],
 ```
+
 </br>
 
 ## Arrays
