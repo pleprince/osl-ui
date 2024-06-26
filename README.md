@@ -2,6 +2,26 @@
 
 Draft 1
 
+## Table of contents
+
+1. [Motivation](#motivation)
+1. [Support Levels](#support-levels)
+1. [Common Keywords](#common-keywords)
+1. [page](#page-std)
+1. [widget](#widget-std)
+   1. [number](#widget-number-std)
+   1. [string](#widget-string-std)
+   1. [checkBox](#widget-checkbox-std)
+   1. [color](#widget-color-std)
+   1. [popup](#widget-popup-std)
+   1. [mapper](#widget-mapper-std)
+   1. [fileInput](#widget-fileinput-new)
+   1. [colorRamp](#widget-colorramp-new)
+   1. [floatRamp](#widget-floatramp-new)
+1. [Arrays](#arrays-new)
+1. [Conditional visibility or locking](#conditional-visibility-or-locking-new)
+1. [DCC app integration](#dcc-app-integration-new)
+
 ## Motivation
 
 User interfaces are important for usability and enforcing conventions across DCCs goes a long way towards makintg artists' work easier.
