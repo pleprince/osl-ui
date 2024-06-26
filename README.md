@@ -449,8 +449,11 @@ The keyword structure is as follows:
 ##### Sample code
 
 ```c
-// Make linearize_sRGB visible
-// if (textureName != "" and textureGain > 0).
+// Make linearize_sRGB visible if
+// (textureName != "" && textureGain > 0).
+//  >  visLeft = visTexPath visTexOp visTexValue
+//  >  visRight = visGainPath visGainOp visGainValue
+//  >  Visibility = visLeft visOp VisRight
 
 string textureName = ""
 [[
