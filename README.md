@@ -1,4 +1,4 @@
-# UI metadata standardisation proposal
+# OSL metadata standardisation proposal
 
 Draft 1
 
@@ -27,6 +27,7 @@ One would hope that developers implements at least the basic level, as it would 
 As of today:
 
 * RenderMan plugins are very close to full support.
+* 3Delight supports a very good range of keywords.
 * Arnold plugins mostly ignore parameter metadata as it historically relied on an external metadata file.
 * Blender only supports 4 keywords.
 * VRay TBD
@@ -154,8 +155,10 @@ A widget used to edit color parameters.
 
 | Widget options | Type | Description | |
 | - | - | - | - |
-| `color_enableFilmlookVis` | int | Enable color-managed UI. | ![new](img/new.svg) |
+| `color_enableFilmlookVis`[^1] | int | Enable color-managed UI. | ![new](img/new.svg) |
 | `color_restrictComponents` | int | Limit components to [0:1] | ![new](img/new.svg) |
+
+[^1]: This is a Katana-ism and I would prefer something more generic like `color_managed` that doesn't mention "film".
 
 ##### Sample code
 
@@ -382,6 +385,9 @@ These keywords allow to control a parameter's visibility or editability based on
 
 > [!NOTE]
 >Katana uses `conditionalVis` / `conditionalLock` but I prefer a shorter keyword as it is still descriptive enough. TBD.
+
+> [!NOTE]
+> Pages should also support conditional visibility and locking.
 
 The keyword structure is as follows:
 
