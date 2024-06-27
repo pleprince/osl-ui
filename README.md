@@ -72,11 +72,13 @@ These keywords are supported by all widgets.
 
 ## `page`
 
+![full](img/full.svg)
+
 Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.Advanced".
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `open` | int | If 1, the page UI is expanded by default | ![new](img/new.svg) |
+| `open` | int | If 1, the page UI is expanded by default | ![full](img/full.svg) |
 
 ##### Sample code
 
