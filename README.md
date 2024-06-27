@@ -51,7 +51,7 @@ One would hope that developers implements at least the basic level, as it would 
 As of today:
 
 * RenderMan plugins are very close to full support.
-* 3Delight supports a very good range of keywords.
+* 3Delight plugins are very close to full support.
 * Arnold plugins mostly ignore parameter metadata as it historically relied on an external metadata file.
 * Blender only supports 4 keywords.
 * VRay TBD
@@ -62,12 +62,12 @@ As of today:
 
 These keywords are supported by all widgets.
 
-| Keyword | Type | Description | |
+| Keyword | Type | Description | Level |
 | - | - | - | - |
-| `label` | string | A user-friendly name used in the UI | ![std](img/std.svg) |
-| `help` | string | A description of the parameter that may appear in the UI | ![std](img/std.svg) |
-| `readOnly` | int | If non-zero, only connections will be considered. Defaults to 0. | ![new](img/new.svg) |
-| `connectable` | int | Specifies if this parameter accepts an incoming connection. If not connectable, the host app should forbid connections. Default to 1.| ![new](img/new.svg) |
+| `label` | string | A user-friendly name used in the UI | ![basic](img/basic.svg) |
+| `help` | string | A description of the parameter that may appear in the UI | ![basic](img/basic.svg) |
+| `readOnly` | int | If non-zero, only connections will be considered. Defaults to 0. | ![full](img/full.svg) |
+| `connectable` | int | Specifies if this parameter accepts an incoming connection. If not connectable, the host app should forbid connections. Default to 1.| ![full](img/full.svg) |
 </br>
 
 ## `page`
@@ -109,6 +109,8 @@ Defines which widget type will control the parameter. All parameter types defaul
 
 ### Widget: `null`
 
+![basic](img/basic.svg)
+
 Parameters using a `null` widget are invisible in the UI.
 
 ##### Sample code
@@ -122,16 +124,18 @@ string asset_version = "2.3.0"
 
 ### Widget: `number`
 
+![basic](img/basic.svg)
+
 A widget for editable numeric values. This is the default widget used for number parameters.
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `min` | float / int | An absolute minimum value for the parameter. | ![std](img/std.svg) |
-| `max` | float / int | An absolute maximum value for the parameter. | ![std](img/std.svg) |
-| `digits` | int | Number of digits displayed after the decimal point. | ![std](img/std.svg) |
-| `slider` | int | If non-zero, display a slider to edit the value. | ![std](img/std.svg) |
-| `slidermin` | float / int | Minimum value of the slider. | ![std](img/std.svg) |
-| `slidermax` | float / int | Maximum value of the slider. | ![std](img/std.svg) |
+| `min` | float / int | An absolute minimum value for the parameter. | ![basic](img/basic.svg) |
+| `max` | float / int | An absolute maximum value for the parameter. | ![basic](img/basic.svg) |
+| `digits` | int | Number of digits displayed after the decimal point. | ![full](img/full.svg) |
+| `slider` | int | If non-zero, display a slider to edit the value. | ![full](img/full.svg) |
+| `slidermin` | float / int | Minimum value of the slider. | ![full](img/full.svg) |
+| `slidermax` | float / int | Maximum value of the slider. | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -148,6 +152,8 @@ float ior = 1.5
 
 ### Widget: `string`
 
+![basic](img/basic.svg)
+
 Default widget type used for string parameters.
 
 ##### Sample code
@@ -161,6 +167,8 @@ string variant = "default"
 ```
 
 ### Widget: `checkBox`
+
+![basic](img/basic.svg)
 
 An int parameter displayed as a boolean check box.
 
@@ -176,12 +184,14 @@ int invert = 0
 
 ### Widget: `color`
 
+![basic](img/basic.svg)
+
 A widget used to edit color parameters.
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `color_enableFilmlookVis`[^1] | int | Enable color-managed UI. | ![new](img/new.svg) |
-| `color_restrictComponents` | int | Limit components to [0:1] | ![new](img/new.svg) |
+| `color_enableFilmlookVis`[^1] | int | Enable color-managed UI. | ![full](img/full.svg) |
+| `color_restrictComponents` | int | Limit components to [0:1] | ![full](img/full.svg) |
 
 [^1]: This is a Katana-ism and I would prefer something more generic like `color_managed` that doesn't mention "film".
 
@@ -198,12 +208,14 @@ color albedo = "default"
 
 ### Widget: `popup`
 
+![basic](img/basic.svg)
+
 Display a pop-up menu or combox box with literal choices for a string parameter.
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![std](img/std.svg) |
-| `editable` | int | If non-zero, present an editable field with a side menu | ![new](img/new.svg) |
+| `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![basic](img/basic.svg) |
+| `editable` | int | If non-zero, present an editable field with a side menu | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -217,11 +229,13 @@ string sss_mode = "default"
 
 ### Widget: `mapper`
 
+![basic](img/basic.svg)
+
 An menu presenting associative choices (like enums) for int, float and string parameters.
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `options` | string | A pipe-delimited list of menu items : value pairs, i.e. `"Add:0\|Over:1\|Multiply:2"` | ![std](img/std.svg) |
+| `options` | string | A pipe-delimited list of menu items : value pairs. | ![basic](img/basic.svg) |
 
 ##### Sample code
 
@@ -236,12 +250,14 @@ int compositingMode = 0
 
 ### Widget: `fileInput`
 
+![basic](img/basic.svg)
+
 A string attributes containing a file path. There should always be an associated button to open a file browser and select the file.
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `fileTypes` | string | A comma-delimited list of extensions, i.e. `"tex,tx,exr"`, to filter the dialog's file list. | ![std](img/std.svg) |
-| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available. | ![new](img/new.svg) |
+| `fileTypes` | string | A comma-delimited list of extensions, i.e. `"tex,tx,exr"`, to filter the dialog's file list. | ![full](img/full.svg) |
+| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available. | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -254,6 +270,8 @@ string texture = ""
 ```
 
 ### Widget: `colorRamp`
+
+![full](img/full.svg)
 
 > [!NOTE]
 > OSL's spline interpolation shadeops only work on static arrays when most users actually want dynamic arrays. This forces the shader writer to copy multiple dynamic arrays to static arrays. I don't know the exact cost of that operation but it would be great to get rid of this limitation.
@@ -273,12 +291,12 @@ The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `r
 > [!NOTE]
 > Should we extend oslc to validate metadata ?
 
-| Widget options | Type | Description | |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `rampKnots` | string | Name of the parameter storing knot positions. | ![new](img/new.svg) |
-| `rampColor` | string | Name of the parameter storing knot colors. | ![new](img/new.svg) |
-| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![new](img/new.svg) |
-| `gradientHeight` | int | The height of the gradient widget in pixels. | ![new](img/new.svg) |
+| `rampKnots` | string | Name of the parameter storing knot positions. | ![full](img/full.svg) |
+| `rampColor` | string | Name of the parameter storing knot colors. | ![full](img/full.svg) |
+| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![full](img/full.svg) |
+| `rampHeight` | int | The height of the gradient widget in pixels. | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -290,7 +308,7 @@ int colorMap = 4
     string rampKnots = "colorMap_Knots",
     string rampColors = "colorMap_Colors",
     string rampInterp = "colorMap_Interpolation",
-    int gradientHeight = 25,
+    int rampHeight = 25,
 ]],
 float colorMap_Knots[] = {0, 0,
                           1, 1}
@@ -315,6 +333,8 @@ float colorMap_Interpolation[] = {"catmull-rom", "catmull-rom",
 
 ### Widget: `floatRamp`
 
+![full](img/full.svg)
+
 The main parameter is an int parameter with a `colorRamp` widget.
 
 * Its value is the number of currently used knots. This representation allows support of fixed-size ramps.
@@ -323,12 +343,12 @@ The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `r
 
 * If any of theme is missing, an error should be raised.
 
-| Widget options | Type | Description | ![new](img/new.svg) |
+| Widget options | Type | Description | Level |
 | - | - | - | - |
-| `rampKnots` | string | Name of the parameter storing knot positions. | ![new](img/new.svg) |
-| `rampColor` | string | Name of the parameter storing knot colors. | ![new](img/new.svg) |
-| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![new](img/new.svg) |
-| `gradientHeight` | int | The height of the gradient widget in pixels. | ![new](img/new.svg) |
+| `rampKnots` | string | Name of the parameter storing knot positions. | ![full](img/full.svg) |
+| `rampColor` | string | Name of the parameter storing knot colors. | ![full](img/full.svg) |
+| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![full](img/full.svg) |
+| `rampHeight` | int | The height of the gradient widget in pixels. | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -340,7 +360,7 @@ int attenuationCurve = 5
     string rampKnots = "attenCrv_Knots",
     string rampFloats = "attenCrv_Values",
     string rampInterp = "attenCrv_Interpolation",
-    int gradientHeight = 25,
+    int rampHeight = 25,
 ]],
 float attenCrv_Knots[] = {0, 0, 0.5, 1, 1}
 [[
@@ -365,18 +385,20 @@ float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
 
 ## Arrays
 
+![full](img/full.svg)
+
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
 
 * **Dynamic arrays** allow the addition, re-ordering and removal of array elements.
 * **UI Structs** are a way to display multiple arrays as if they were a single array of structs, which isn't natively supported by OSL, but useful to group, for example, layer parameters. If the arrays are dynamic, it will be the responsability of the DCC app to keep all participating arrays at the same size at all times.
 
-| Array options | Type | Description | |
+| Array options | Type | Description | Level |
 | - | - | - | - |
-| `size` | int | **Static arrays**: the array size.</br>**Dynamic arrays**: the number of existing members on node creation. Defaults to <kbd>-1</kbd> for empty. | [new](img/new.svg) |
-| `isDynamicArray` | int | Specifies if the array can be resized. | [new](img/new.svg) |
-| `uiStruct` | string | Associate this array with a named struct-like UI where members of multiple arrays are displayed interlaced. | [new](img/new.svg) |
-| `tupleSize` | int | Specifies the tuple size (column count). This is passed to the child widgets. | [new](img/new.svg) |
-| `tupleGroupSize` | int | Specifies the number of tuples each child widget should handle. | [new](img/new.svg) |
+| `size` | int | **Static arrays**: the array size.</br>**Dynamic arrays**: the number of existing members on node creation. Defaults to <kbd>-1</kbd> for empty. | ![full](img/full.svg) |
+| `isDynamicArray` | int | Specifies if the array can be resized. | ![full](img/full.svg) |
+| `uiStruct` | string | Associate this array with a named struct-like UI where members of multiple arrays are displayed interlaced. | ![full](img/full.svg) |
+| `tupleSize` | int | Specifies the tuple size (column count). This is passed to the child widgets. | ![full](img/full.svg) |
+| `tupleGroupSize` | int | Specifies the number of tuples each child widget should handle. | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -409,6 +431,8 @@ float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
 
 ## Conditional visibility or locking
 
+![full](img/full.svg)
+
 These keywords allow to control a parameter's visibility or editability based on the value of one or more shader parameters. The comparison rules are defined as a set of pair-wise comparisons: <code><i>prefix</i>Path <i>prefix</i>Op <i>prefix</i>Value</code> or <code><i>prefix</i>Left <i>prefix</i>Op <i>prefix</i>Right</code>
 
 > [!NOTE]
@@ -424,28 +448,28 @@ The keyword structure is as follows:
 1. It is followed by an optional identifying suffix.
 1. It ends with one of the following tokens: `Op`, `Path`, `Value`, `Left`, `Right`.
 
-| Visibility | Type | Description | |
+| Visibility | Type | Description | Level |
 | - | - | - | - |
-| `vis*Path` | string | Parameter path constituting the left side of the comparison. | ![new](img/new.svg) |
-| `vis*Op` | string | Comparison method to show/hide this parameter | ![new](img/new.svg) |
-| `vis*Value` | string | A value for the right side of the comparison. | ![new](img/new.svg) |
+| `vis*Path` | string | Parameter path constituting the left side of the comparison. | ![full](img/full.svg) |
+| `vis*Op` | string | Comparison method to show/hide this parameter | ![full](img/full.svg) |
+| `vis*Value` | string | A value for the right side of the comparison. | ![full](img/full.svg) |
 
-| Locking | Type | Description | |
+| Locking | Type | Description | Level|
 | - | - | - | - |
-| `lock*Path` | string | Parameter path constituting the left side of the comparison. | ![new](img/new.svg) |
-| `lock*Op` | string | the comparison method to lock/inlock this parameter | ![new](img/new.svg) |
-| `lock*Value` | string | A value for the right side of the comparison. | ![new](img/new.svg) |
+| `lock*Path` | string | Parameter path constituting the left side of the comparison. | ![full](img/full.svg) |
+| `lock*Op` | string | the comparison method to lock/inlock this parameter | ![full](img/full.svg) |
+| `lock*Value` | string | A value for the right side of the comparison. | ![full](img/full.svg) |
 
-| Comparisons | Description | |
+| Comparisons | Description | Level |
 | - | - | - |
-| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
-| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
-| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
-| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
-| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
-| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> | ![new](img/new.svg) |
-| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![new](img/new.svg) |
-| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![new](img/new.svg) |
+| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
+| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
+| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
+| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
+| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
+| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
+| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![full](img/full.svg) |
+| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![full](img/full.svg) |
 
 ##### Sample code
 
@@ -486,15 +510,17 @@ int linearize_sRGB = 0
 
 ## DCC app integration
 
+![full](img/full.svg)
+
 Occasionaly, OSL shaders need to carry more metadata to make integrate with host applications.
 
-| Visibility | Type | Description | |
+| Visibility | Type | Description | Level |
 | - | - | - | - |
-| `*_nodeID` | int/string | Some apps like maya require a unique nodeID to avoid collisions. This should be prefixed with an identifier like a plugin name, i.e. rfm_nodeID |  |
-| `tags` | string[] | a number of tags to help the host app categorize / handle OSL nodes. |  |
-| `*_attribute` | string | Specifies the name of the attribute that corresponds to this parameter. It should be prefixed an identifier like a plugin name, i.e. 3dlmaya_attribute |  |
-| `hidden` | int | Maya-specific: set the hidden flag of the attribute created for this parameter. |  |
-| `niceName` | string | Maya-specific: Sets the nice name of the attribute for display in the UI. |  |
+| `*_nodeID` | int/string | Some apps like maya require a unique nodeID to avoid collisions. This should be prefixed with an identifier like a plugin name, i.e. rfm_nodeID | ![full](img/full.svg) |
+| `tags` | string[] | a number of tags to help the host app categorize / handle OSL nodes. | ![full](img/full.svg) |
+| `*_attribute` | string | Specifies the name of the attribute that corresponds to this parameter. It should be prefixed an identifier like a plugin name, i.e. 3dlmaya_attribute | ![full](img/full.svg) |
+| `hidden` | int | Maya-specific: set the hidden flag of the attribute created for this parameter. | ![full](img/full.svg) |
+| `niceName` | string | Maya-specific: Sets the nice name of the attribute for display in the UI. | ![full](img/full.svg) |
 
 #### Sample code
 
