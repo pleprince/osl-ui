@@ -9,6 +9,7 @@ Draft 1
 1. [Common Keywords](#common-keywords)
 1. [page](#page)
 1. [widget](#widget)
+   1. [null](#widget-null)
    1. [number](#widget-number)
    1. [string](#widget-string)
    1. [checkBox](#widget-checkbox)
@@ -106,7 +107,7 @@ int specularModel = 1
 
 Defines which widget type will control the parameter. All parameter types default to a sensible widget if un-defined in the metadata block.
 
-### Widget: `null` ![std](img/std.svg)
+### Widget: `null`
 
 Parameters using a `null` widget are invisible in the UI.
 
