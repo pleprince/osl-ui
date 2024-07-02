@@ -37,14 +37,9 @@ The emphasis of this proposal is to define a somewhat minimal set of UI hints th
 
 Given the number of controls to implement, it may be useful to introduce support levels.
 
-* ![partial](img/partial.svg) : Only support a small number of randomly chosen keywords.
-* ![basic](img/basic.svg) : Support a minimal standard set of keywords.
-* ![full](img/full.svg) : Support most if not all keywords.
-
-<!-- badge generation -->
-<!-- ![partial](https://img.shields.io/badge/osl_metadata-PARTIAL-ff5533) -->
-<!-- ![basic](https://img.shields.io/badge/osl_metadata-BASIC-44aa44) -->
-<!-- ![full](https://img.shields.io/badge/osl_metadata-FULL-08f) -->
+* ![partial][p] : Only support a small number of randomly chosen keywords.
+* ![basic][b] : Support a minimal standard set of keywords.
+* ![full][f] : Support most if not all keywords.
 
 One would hope that developers implements at least the basic level, as it would already provide a reasonnable user-experience.
 
@@ -64,21 +59,21 @@ These keywords are supported by all widgets.
 
 | Keyword | Type | Description | Level |
 | - | - | - | - |
-| `label` | string | A user-friendly name used in the UI | ![basic](img/basic.svg) |
-| `help` | string | A description of the parameter that may appear in the UI | ![basic](img/basic.svg) |
-| `readOnly` | int | If non-zero, only connections will be considered. Defaults to 0. | ![full](img/full.svg) |
-| `connectable` | int | Specifies if this parameter accepts an incoming connection. If not connectable, the host app should forbid connections. Default to 1.| ![full](img/full.svg) |
+| `label` | string | A user-friendly name used in the UI | ![basic][b] |
+| `help` | string | A description of the parameter that may appear in the UI | ![basic][b] |
+| `readOnly` | int | If non-zero, only connections will be considered. Defaults to 0. | ![full][f] |
+| `connectable` | int | Specifies if this parameter accepts an incoming connection. If not connectable, the host app should forbid connections. Default to 1.| ![full][f] |
 </br>
 
 ## `page`
 
-![full](img/full.svg)
+![full][f]
 
 Assign the parameter to a page defined as a dot-separated path, i.e. "Specular.Advanced".
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `open` | int | If 1, the page UI is expanded by default | ![full](img/full.svg) |
+| `open` | int | If 1, the page UI is expanded by default | ![full][f] |
 
 ##### Sample code
 
@@ -111,7 +106,7 @@ Defines which widget type will control the parameter. All parameter types defaul
 
 ### Widget: `null`
 
-![basic](img/basic.svg)
+![basic][b]
 
 Parameters using a `null` widget are invisible in the UI.
 
@@ -126,18 +121,18 @@ string asset_version = "2.3.0"
 
 ### Widget: `number`
 
-![basic](img/basic.svg)
+![basic][b]
 
 A widget for editable numeric values. This is the default widget used for number parameters.
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `min` | float / int | An absolute minimum value for the parameter. | ![basic](img/basic.svg) |
-| `max` | float / int | An absolute maximum value for the parameter. | ![basic](img/basic.svg) |
-| `digits` | int | Number of digits displayed after the decimal point. | ![full](img/full.svg) |
-| `slider` | int | If non-zero, display a slider to edit the value. | ![full](img/full.svg) |
-| `slidermin` | float / int | Minimum value of the slider. | ![full](img/full.svg) |
-| `slidermax` | float / int | Maximum value of the slider. | ![full](img/full.svg) |
+| `min` | float / int | An absolute minimum value for the parameter. | ![basic][b] |
+| `max` | float / int | An absolute maximum value for the parameter. | ![basic][b] |
+| `digits` | int | Number of digits displayed after the decimal point. | ![full][f] |
+| `slider` | int | If non-zero, display a slider to edit the value. | ![full][f] |
+| `slidermin` | float / int | Minimum value of the slider. | ![full][f] |
+| `slidermax` | float / int | Maximum value of the slider. | ![full][f] |
 
 ##### Sample code
 
@@ -154,7 +149,7 @@ float ior = 1.5
 
 ### Widget: `string`
 
-![basic](img/basic.svg)
+![basic][b]
 
 Default widget type used for string parameters.
 
@@ -170,7 +165,7 @@ string variant = "default"
 
 ### Widget: `checkBox`
 
-![basic](img/basic.svg)
+![basic][b]
 
 An int parameter displayed as a boolean check box.
 
@@ -186,14 +181,14 @@ int invert = 0
 
 ### Widget: `color`
 
-![basic](img/basic.svg)
+![basic][b]
 
 A widget used to edit color parameters.
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `color_enableFilmlookVis`[^1] | int | Enable color-managed UI. | ![full](img/full.svg) |
-| `color_restrictComponents` | int | Limit components to [0:1] | ![full](img/full.svg) |
+| `color_enableFilmlookVis`[^1] | int | Enable color-managed UI. | ![full][f] |
+| `color_restrictComponents` | int | Limit components to [0:1] | ![full][f] |
 
 [^1]: This is a Katana-ism and I would prefer something more generic like `color_managed` that doesn't mention "film".
 
@@ -210,14 +205,14 @@ color albedo = "default"
 
 ### Widget: `popup`
 
-![basic](img/basic.svg)
+![basic][b]
 
 Display a pop-up menu or combox box with literal choices for a string parameter.
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![basic](img/basic.svg) |
-| `editable` | int | If non-zero, present an editable field with a side menu | ![full](img/full.svg) |
+| `options` | string | A pipe-delimited list of menu items, i.e. `"One\|Two\|Three"` | ![basic][b] |
+| `editable` | int | If non-zero, present an editable field with a side menu | ![full][f] |
 
 ##### Sample code
 
@@ -231,13 +226,13 @@ string sss_mode = "default"
 
 ### Widget: `mapper`
 
-![basic](img/basic.svg)
+![basic][b]
 
 An menu presenting associative choices (like enums) for int, float and string parameters.
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `options` | string | A pipe-delimited list of menu items : value pairs. | ![basic](img/basic.svg) |
+| `options` | string | A pipe-delimited list of menu items : value pairs. | ![basic][b] |
 
 ##### Sample code
 
@@ -252,14 +247,14 @@ int compositingMode = 0
 
 ### Widget: `fileInput`
 
-![basic](img/basic.svg)
+![basic][b]
 
 A string attributes containing a file path. There should always be an associated button to open a file browser and select the file.
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `fileTypes` | string | A comma-delimited list of extensions, i.e. `"tex,tx,exr"`, to filter the dialog's file list. | ![full](img/full.svg) |
-| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available. | ![full](img/full.svg) |
+| `fileTypes` | string | A comma-delimited list of extensions, i.e. `"tex,tx,exr"`, to filter the dialog's file list. | ![full][f] |
+| `assetDialog` | int | Controls if an asset selection dialog should be prefered to a standard file browser. Defaults to 1 and fallback to a standard file dialog is not available. | ![full][f] |
 
 ##### Sample code
 
@@ -273,7 +268,7 @@ string texture = ""
 
 ### Widget: `colorRamp`
 
-![full](img/full.svg)
+![full][f]
 
 > [!NOTE]
 > OSL's spline interpolation shadeops only work on static arrays when most users actually want dynamic arrays. This forces the shader writer to copy multiple dynamic arrays to static arrays. I don't know the exact cost of that operation but it would be great to get rid of this limitation.
@@ -295,10 +290,10 @@ The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `r
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `rampKnots` | string | Name of the parameter storing knot positions. | ![full](img/full.svg) |
-| `rampColor` | string | Name of the parameter storing knot colors. | ![full](img/full.svg) |
-| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![full](img/full.svg) |
-| `rampHeight` | int | The height of the gradient widget in pixels. | ![full](img/full.svg) |
+| `rampKnots` | string | Name of the parameter storing knot positions. | ![full][f] |
+| `rampColor` | string | Name of the parameter storing knot colors. | ![full][f] |
+| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![full][f] |
+| `rampHeight` | int | The height of the gradient widget in pixels. | ![full][f] |
 
 ##### Sample code
 
@@ -335,7 +330,7 @@ float colorMap_Interpolation[] = {"catmull-rom", "catmull-rom",
 
 ### Widget: `floatRamp`
 
-![full](img/full.svg)
+![full][f]
 
 The main parameter is an int parameter with a `colorRamp` widget.
 
@@ -347,10 +342,10 @@ The metadata MUST define 3 additional keywords (`rampKnots`, `rampColors` and `r
 
 | Widget options | Type | Description | Level |
 | - | - | - | - |
-| `rampKnots` | string | Name of the parameter storing knot positions. | ![full](img/full.svg) |
-| `rampColor` | string | Name of the parameter storing knot colors. | ![full](img/full.svg) |
-| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![full](img/full.svg) |
-| `rampHeight` | int | The height of the gradient widget in pixels. | ![full](img/full.svg) |
+| `rampKnots` | string | Name of the parameter storing knot positions. | ![full][f] |
+| `rampColor` | string | Name of the parameter storing knot colors. | ![full][f] |
+| `rampInterp` | string | Name of the parameter storing interpolation bases. </br><ul><li>If that parameter is a string array, each span can have a different interpolation basis.</li><li>If that parameter is a string, all spans use the same interpolation basis.</li></ul> | ![full][f] |
+| `rampHeight` | int | The height of the gradient widget in pixels. | ![full][f] |
 
 ##### Sample code
 
@@ -387,7 +382,7 @@ float attenCrv_Interpolation[] = {"catmull-rom", "catmull-rom",
 
 ## Arrays
 
-![full](img/full.svg)
+![full][f]
 
 OSL support array parameters of any types and the metadata allows writers to decide which widget should be used.
 
@@ -396,11 +391,11 @@ OSL support array parameters of any types and the metadata allows writers to dec
 
 | Array options | Type | Description | Level |
 | - | - | - | - |
-| `size` | int | **Static arrays**: the array size.</br>**Dynamic arrays**: the number of existing members on node creation. Defaults to <kbd>-1</kbd> for empty. | ![full](img/full.svg) |
-| `isDynamicArray` | int | Specifies if the array can be resized. | ![full](img/full.svg) |
-| `uiStruct` | string | Associate this array with a named struct-like UI where members of multiple arrays are displayed interlaced. | ![full](img/full.svg) |
-| `tupleSize` | int | Specifies the tuple size (column count). This is passed to the child widgets. | ![full](img/full.svg) |
-| `tupleGroupSize` | int | Specifies the number of tuples each child widget should handle. | ![full](img/full.svg) |
+| `size` | int | **Static arrays**: the array size.</br>**Dynamic arrays**: the number of existing members on node creation. Defaults to <kbd>-1</kbd> for empty. | ![full][f] |
+| `isDynamicArray` | int | Specifies if the array can be resized. | ![full][f] |
+| `uiStruct` | string | Associate this array with a named struct-like UI where members of multiple arrays are displayed interlaced. | ![full][f] |
+| `tupleSize` | int | Specifies the tuple size (column count). This is passed to the child widgets. | ![full][f] |
+| `tupleGroupSize` | int | Specifies the number of tuples each child widget should handle. | ![full][f] |
 
 ##### Sample code
 
@@ -433,7 +428,7 @@ float triplanarAxisRepeat[3] = {1.0, 1.0, 1.0}
 
 ## Conditional visibility or locking
 
-![full](img/full.svg)
+![full][f]
 
 These keywords allow to control a parameter's visibility or editability based on the value of one or more shader parameters. The comparison rules are defined as a set of pair-wise comparisons: <code><i>prefix</i>Path <i>prefix</i>Op <i>prefix</i>Value</code> or <code><i>prefix</i>Left <i>prefix</i>Op <i>prefix</i>Right</code>
 
@@ -452,26 +447,26 @@ The keyword structure is as follows:
 
 | Visibility | Type | Description | Level |
 | - | - | - | - |
-| `vis*Path` | string | Parameter path constituting the left side of the comparison. | ![full](img/full.svg) |
-| `vis*Op` | string | Comparison method to show/hide this parameter | ![full](img/full.svg) |
-| `vis*Value` | string | A value for the right side of the comparison. | ![full](img/full.svg) |
+| `vis*Path` | string | Parameter path constituting the left side of the comparison. | ![full][f] |
+| `vis*Op` | string | Comparison method to show/hide this parameter | ![full][f] |
+| `vis*Value` | string | A value for the right side of the comparison. | ![full][f] |
 
 | Locking | Type | Description | Level|
 | - | - | - | - |
-| `lock*Path` | string | Parameter path constituting the left side of the comparison. | ![full](img/full.svg) |
-| `lock*Op` | string | the comparison method to lock/inlock this parameter | ![full](img/full.svg) |
-| `lock*Value` | string | A value for the right side of the comparison. | ![full](img/full.svg) |
+| `lock*Path` | string | Parameter path constituting the left side of the comparison. | ![full][f] |
+| `lock*Op` | string | the comparison method to lock/inlock this parameter | ![full][f] |
+| `lock*Value` | string | A value for the right side of the comparison. | ![full][f] |
 
 | Comparisons | Description | Level |
 | - | - | - |
-| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
-| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
-| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
-| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
-| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
-| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> | ![full](img/full.svg) |
-| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![full](img/full.svg) |
-| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![full](img/full.svg) |
+| `equalTo` | <kbd><i>prefix</i>Path == <i>prefix</i>Value</kbd> | ![full][f] |
+| `notEqualTo` | <kbd><i>prefix</i>Path != <i>prefix</i>Value</kbd> | ![full][f] |
+| `greaterThan` | <kbd><i>prefix</i>Path > <i>prefix</i>Value</kbd> | ![full][f] |
+| `lessThan` | <kbd><i>prefix</i>Path < <i>prefix</i>Value</kbd> | ![full][f] |
+| `greaterThanOrEqualTo` | <kbd><i>prefix</i>Path >= <i>prefix</i>Value</kbd> | ![full][f] |
+| `lessThanOrEqualTo` | <kbd><i>prefix</i>Path <= <i>prefix</i>Value</kbd> | ![full][f] |
+| `and` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![full][f] |
+| `or` | <kbd><i>prefix</i>Left <= <i>prefix</i>Right</kbd> | ![full][f] |
 
 ##### Sample code
 
@@ -512,17 +507,17 @@ int linearize_sRGB = 0
 
 ## DCC app integration
 
-![full](img/full.svg)
+![full][f]
 
 Occasionaly, OSL shaders need to carry more metadata to make integrate with host applications.
 
 | Visibility | Type | Description | Level |
 | - | - | - | - |
-| `*_nodeID` | int/string | Some apps like maya require a unique nodeID to avoid collisions. This should be prefixed with an identifier like a plugin name, i.e. rfm_nodeID | ![full](img/full.svg) |
-| `tags` | string[] | a number of tags to help the host app categorize / handle OSL nodes. | ![full](img/full.svg) |
-| `*_attribute` | string | Specifies the name of the attribute that corresponds to this parameter. It should be prefixed an identifier like a plugin name, i.e. 3dlmaya_attribute | ![full](img/full.svg) |
-| `hidden` | int | Maya-specific: set the hidden flag of the attribute created for this parameter. | ![full](img/full.svg) |
-| `niceName` | string | Maya-specific: Sets the nice name of the attribute for display in the UI. | ![full](img/full.svg) |
+| `*_nodeID` | int/string | Some apps like maya require a unique nodeID to avoid collisions. This should be prefixed with an identifier like a plugin name, i.e. rfm_nodeID | ![full][f] |
+| `tags` | string[] | a number of tags to help the host app categorize / handle OSL nodes. | ![full][f] |
+| `*_attribute` | string | Specifies the name of the attribute that corresponds to this parameter. It should be prefixed an identifier like a plugin name, i.e. 3dlmaya_attribute | ![full][f] |
+| `hidden` | int | Maya-specific: set the hidden flag of the attribute created for this parameter. | ![full][f] |
+| `niceName` | string | Maya-specific: Sets the nice name of the attribute for display in the UI. | ![full][f] |
 
 #### Sample code
 
@@ -537,3 +532,7 @@ shader voronoi
     ...
 )
 ```
+
+[p]: https://img.shields.io/badge/osl_metadata-PARTIAL-ff5533
+[b]: https://img.shields.io/badge/osl_metadata-BASIC-44aa44
+[f]: https://img.shields.io/badge/osl_metadata-FULL-08f
