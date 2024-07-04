@@ -277,7 +277,15 @@ string texture = ""
 > Start and end knots need to be repeated n-times depending on the interpolation scheme. It would be nice to add an option flag to let the spline shadeop automatically select the correct number of repetitions.
 
 > [!NOTE]
-> It would be good to make sure DCC app widgets support all standard OSL interpolation modes. Last time I checked Maya did not.
+> It would be good to make sure DCC app widgets support all standard OSL interpolation modes. Last time I checked Maya did not, blender used other bases, etc.
+
+> [!NOTE]
+> Do we really want to support per-knot interpolation bases ?
+>
+> * It adds a lot of complexity to the shader code, as you need to change the number of knots based on the selected basis and compute these extra points positions and values to  enforce a predefined c0/c1 continuity heuristic.
+>   * Even if this is partially handled by the DCC UI, it adds a lot of book-keeping.
+> * Some bases allow for smooth and discontinuous tangents, which is, I believe, flexible enough.
+>   + The artist will be responsible for creating enough knots, beyond the standard beginning/end repetitions, and will be guided by the UI's visual feedback.
 
 Color ramps depend on multiple parameters to provide knots position, knots value and knots interpolation.
 
