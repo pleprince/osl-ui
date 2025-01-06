@@ -544,3 +544,8 @@ shader voronoi
 [p]: https://img.shields.io/badge/osl_metadata-PARTIAL-ff5533
 [b]: https://img.shields.io/badge/osl_metadata-BASIC-44aa44
 [f]: https://img.shields.io/badge/osl_metadata-FULL-08f
+
+----
+
+![Alt](https://repobeats.axiom.co/api/embed/71e770fa43f2863b35efc4376698e8a8ee8ffd1a.svg "Repobeats analytics image")
+
